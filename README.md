@@ -2,7 +2,7 @@
 
 <p align=center>Back-Ends simplified.</p>
 
-<pre align=center><code>pip install</code></pre>
+<div align=center><pre><code>pip install backpipe</code></pre></div>
 
 ## Why the name?
 
