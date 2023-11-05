@@ -20,8 +20,8 @@ class BackPipeServer(SimpleHTTPRequestHandler):
     def log_message(self, format: str, *args: Any) -> None:
         additional_info = ""
         if not self.command in ("GET", "POST", "PUT", "PATCH", "DELETE"):
-            additional_info = f"{Fore.RED}(Unsupported Method){Fore.RESET}"
-        print(f"{Back.LIGHTGREEN_EX}{Fore.BLACK} {self.command} {Back.RESET}{Fore.RESET} {additional_info} Request from {self.client_address[0]}")
+            additional_info = f"{Fore.RED} (Unsupported Method){Fore.RESET}"
+        print(f"{Back.LIGHTGREEN_EX}{Fore.BLACK} {self.command} {Back.RESET}{Fore.RESET}{additional_info} Request from {self.client_address[0]}")
     def handle_one_request(self) -> None:
         try:
             self.raw_requestline = self.rfile.readline(65537)
