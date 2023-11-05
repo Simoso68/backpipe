@@ -1,0 +1,9 @@
+# Binaries
+
+__pycache__
+
+# Package
+
+/build
+/dist
+/backpipe.egg-info
