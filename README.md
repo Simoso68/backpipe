@@ -7,7 +7,8 @@
 <img src='https://static.pepy.tech/badge/backpipe'>
 <img src="https://img.shields.io/pypi/l/backpipe?color=yellow">
 <img src="https://img.shields.io/github/repo-size/Simoso68/backpipe?color=green">
-<img src="https://tokei.rs/b1/github/simoso68/backpipe?category=lines">
+<img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2FSimoso68%2Fbackpipe%2Flanguages&query=Python&label=characters&color=green">
+
 
 <br>
 </div>
