@@ -11,6 +11,8 @@ class BackPipeBuilder():
         self.patch = server.undefined
         self.delete = server.undefined
         self.unknown = server.unknown_method
+        self.ratelimit = -1
+        self.ratelimit_message = server.ratelimited_default
     def set_get(self, f):
         self.get = f
     def set_post(self, f):
@@ -24,4 +26,4 @@ class BackPipeBuilder():
     def set_unknown(self, f):
         self.unknown = f
     def run(self):
-        Server(self.get, self.post, self.put, self.patch, self.delete, self.unknown, server_address=(self.addr, self.port), RequestHandlerClass=server.BackPipeServer).serve_forever()
+        Server(self.get, self.post, self.put, self.patch, self.delete, self.unknown, ratelimit=(self.ratelimit, self.ratelimit_message),server_address=(self.addr, self.port), RequestHandlerClass=server.BackPipeServer).serve_forever()

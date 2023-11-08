@@ -2,6 +2,16 @@
 
 <p align=center>Back-Ends simplified.</p>
 
+<div align=center>
+<img src="https://img.shields.io/pypi/v/backpipe?color=blue">
+<img src='https://static.pepy.tech/badge/backpipe'>
+<img src="https://img.shields.io/pypi/l/backpipe?color=yellow">
+<img src="https://img.shields.io/github/repo-size/Simoso68/backpipe?color=green">
+<img src="https://tokei.rs/b1/github/simoso68/backpipe?category=lines">
+
+<br>
+</div>
+
 <div align=center><pre><code>pip install backpipe</code></pre></div>
 
 ## Why the name?
