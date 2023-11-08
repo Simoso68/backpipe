@@ -1,11 +1,11 @@
 import backpipe
 
-server = backpipe.BackPipe(port=8000)
+server = backpipe.BackPipe()
 
 server.set_ratelimit(10)
 
 @server.get
-def get(r):
+def get(r: backpipe.Request):
     return (200, "Got it!")
 
 @server.ratelimit
