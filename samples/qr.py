@@ -3,7 +3,7 @@ import qrcode
 import qrcode.image.svg
 import backpipe
 
-server = backpipe.BackPipe(port=8000)
+server = backpipe.BackPipe()
 
 @server.post
 def answer(r: backpipe.Request):
