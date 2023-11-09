@@ -34,7 +34,6 @@ Thread(target=clearing_crqm).start()
 class BackPipeServer(SimpleHTTPRequestHandler):
     def __init__(self, request, client_address, server: BackPipeHoster, *, directory: str | None = None) -> None:
         super().__init__(request, client_address, server=server, directory=directory)
-        ratelimit = self.server.ratelimit
     def log_message(self, format: str, *args: Any) -> None:
         additional_info = ""
         if not self.command in ("GET", "POST", "PUT", "PATCH", "DELETE"):
