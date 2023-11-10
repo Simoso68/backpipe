@@ -58,25 +58,13 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.any
 def wrong_method(r: backpipe.Request):
-    return (405, "Wrong method, use POST.")
-
-@server.put
-def wrong_method(r: backpipe.Request):
-    return (405, "Wrong method, use POST.")
-
-@server.patch
-def wrong_method(r: backpipe.Request):
-    return (405, "Wrong method, use POST.")
-
-@server.delete
-def wrong_method(r: backpipe.Request):
-    return (405, "Wrong method, use POST.")
+    return (405, f"Wrong method: {r.method}, use POST.")
 
 @server.unknown
 def unknown_method(r: backpipe.Request):
-    return (405, "Unsupported method, use POST.")
+    return (405, f"Unknown method: {r.method}, use POST.")
 
 @server.post
 def login(r: backpipe.Request):
