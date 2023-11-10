@@ -10,20 +10,6 @@ from .host import Server as BackPipeHoster
 
 init()
 
-# INIT
-
-client_rq_minute = {}
-
-def clearing_crqm():
-    global client_rq_minute
-    while True:
-        sleep(60)
-        client_rq_minute = {}
-        print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Ratelimits were reset, next reset in 60 seconds.")
-
-clearing_thread = Process(target=clearing_crqm)
-clearing_thread.start()
-
 class BackPipeServer(SimpleHTTPRequestHandler):
     def __init__(self, request, client_address, server: BackPipeHoster, *, directory: str | None = None) -> None:
         super().__init__(request, client_address, server=server, directory=directory)
@@ -49,14 +35,11 @@ class BackPipeServer(SimpleHTTPRequestHandler):
                 return
             mname = 'do_' + self.command
             # RATE LIMIT CHECKING
-
-            global client_rq_minute
             ratelimit = self.server.ratelimit
-            ratelimit_msg = self.server.ratelimit_msg
 
             try:
                 if not ratelimit < 0:
-                    if client_rq_minute[self.client_address[0]] >= ratelimit:
+                    if self.server.client_rq_minute[self.client_address[0]] >= ratelimit:
                         print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Last request from {self.client_address[0]} was blocked (Rate-Limit).{Fore.RESET}")
                         answer = self.server.ratelimit_msg(Request(self.client_address, self.path, self.headers, self.command))
                         self.handlerq(answer)
@@ -65,9 +48,9 @@ class BackPipeServer(SimpleHTTPRequestHandler):
                 pass
 
             try:
-                client_rq_minute[self.client_address[0]] = client_rq_minute[self.client_address[0]] + 1
+                self.server.client_rq_minute[self.client_address[0]] = self.server.client_rq_minute[self.client_address[0]] + 1
             except KeyError:
-                client_rq_minute[self.client_address[0]] = 1
+                self.server.client_rq_minute[self.client_address[0]] = 1
 
             if not hasattr(self, mname):
                 answer = self.server.unknown(Request(self.client_address, self.path, self.headers, self.command))

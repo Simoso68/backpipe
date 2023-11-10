@@ -7,7 +7,7 @@ class BackPipe():
     def __init__(self, address: str = "", port: int = 3000) -> None:
         self.__builder__ = BackPipeBuilder(address, port)
     def __str__(self) -> str:
-        return f"BACKPIPE_SERVER_INSTANCE-(on IP: {self.__builder__.addr}, on Port: {self.__builder__.port})"
+        return f"BackPipe(address='{self.__builder__.addr}', port={self.__builder__.port})"
     def __repr__(self) -> str:
         return self.__str__()
     def set_ratelimit(self, limit: int):
