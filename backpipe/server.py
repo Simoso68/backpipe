@@ -1,9 +1,9 @@
 from http.server import SimpleHTTPRequestHandler
 from http import HTTPStatus
 from socketserver import *
-from colorama import Back, Fore ,init
+from colorama import Back, Fore , init
 from typing import Any
-from threading import Thread
+from multiprocessing import Process
 from time import sleep
 from .rq import Request
 from .host import Server as BackPipeHoster
@@ -28,8 +28,10 @@ def clearing_crqm():
     while True:
         sleep(60)
         client_rq_minute = {}
+        print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Ratelimits were reset, next reset in 60 seconds.")
 
-Thread(target=clearing_crqm).start()
+clearing_thread = Process(target=clearing_crqm)
+clearing_thread.start()
 
 class BackPipeServer(SimpleHTTPRequestHandler):
     def __init__(self, request, client_address, server: BackPipeHoster, *, directory: str | None = None) -> None:
@@ -97,7 +99,7 @@ class BackPipeServer(SimpleHTTPRequestHandler):
             self.close_connection = True
             return
     def handlerq(self, answer):
-        if not isinstance(answer[0], int):#
+        if not isinstance(answer[0], int):
             raise TypeError(f"HTTP status code must be 'int' not '{type(answer[0]).__name__}'")
         self.send_response(answer[0])
         self.end_headers()

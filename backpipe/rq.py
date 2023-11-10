@@ -1,6 +1,9 @@
 from urllib import parse
 
 class Request():
+    """
+    Request Object for function, that are called on request.
+    """
     def __init__(self, c_addr, path: str, headers, method) -> None:
         self.address: str = c_addr[0]
         self.port: int = c_addr[1]

@@ -2,7 +2,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.any
 def get(r: backpipe.Request):
     return (405, "Method not supported, please use POST.")
 

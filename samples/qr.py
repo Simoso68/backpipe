@@ -5,6 +5,10 @@ import backpipe
 
 server = backpipe.BackPipe()
 
+@server.any
+def wrong_method(r: backpipe.Request):
+    return (405, "Method not supported, please use POST.")
+
 @server.post
 def answer(r: backpipe.Request):
     try:

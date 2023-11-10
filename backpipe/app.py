@@ -1,9 +1,9 @@
 from .builder import BackPipeBuilder
-from colorama import Fore, Back, init
-
-init()
 
 class BackPipe():
+    """
+    The class, that is the instance of your API server.
+    """
     def __init__(self, address: str = "", port: int = 3000) -> None:
         self.__builder__ = BackPipeBuilder(address, port)
     def set_ratelimit(self, limit: int):
@@ -24,34 +24,60 @@ class BackPipe():
             self.__builder__.ratelimit_message = function
         return wrapper()
     def get(self, function):
+        """
+        Set the GET request handler.
+        """
         def wrapper():
             self.__builder__.set_get(function)
         return wrapper()
     def post(self, function):
+        """
+        Set the POST request handler.
+        """
         def wrapper():
             self.__builder__.set_post(function)
         return wrapper()
     def put(self, function):
+        """
+        Set the PUT request handler.
+        """
         def wrapper():
             self.__builder__.set_put(function)
         return wrapper()
     def patch(self, function):
+        """
+        Set the PATCH request handler.
+        """
         def wrapper():
             self.__builder__.set_patch(function)
         return wrapper()
     def delete(self, function):
+        """
+        Set the DELETE request handler.
+        """
         def wrapper():
             self.__builder__.set_delete(function)
         return wrapper()
     def unknown(self, function):
+        """
+        If an unknown method is used, the set function will handle it.
+        """
         def wrapper():
             self.__builder__.set_unknown(function)
         return wrapper()
+    def any(self, function):
+        """
+        Set the handler for GET, POST, PUT, PATCH, DELETE.
+        Can be overwritten using the normal way:
+
+        @{server_instance_name}.{method}
+
+        def foo(r):
+            return (200, "Blah.")
+
+        """
+        def wrapper():
+            self.__builder__.set_all(function)
+        return wrapper()
     def run(self):
-        try:
-            print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Starting server ...")
-            print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Press {Fore.LIGHTRED_EX}Ctrl + C{Fore.RESET} to quit.\n")
-            self.__builder__.run()
-        except KeyboardInterrupt:
-            print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} EXIT {Back.RESET}{Fore.RESET} Received Keyboard interrupt.")
-            exit(0)
+        self.__builder__.run()

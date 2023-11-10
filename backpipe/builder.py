@@ -1,5 +1,8 @@
 import backpipe.server as server
 from .host import Server
+from colorama import Fore, Back, init
+
+init()
 
 class BackPipeBuilder():
     def __init__(self, addr, port) -> None:
@@ -25,5 +28,18 @@ class BackPipeBuilder():
         self.delete = f
     def set_unknown(self, f):
         self.unknown = f
+    def set_all(self, f):
+        self.get = f
+        self.post = f
+        self.put = f
+        self.patch = f
+        self.delete = f
     def run(self):
-        Server(self.get, self.post, self.put, self.patch, self.delete, self.unknown, ratelimit=(self.ratelimit, self.ratelimit_message),server_address=(self.addr, self.port), RequestHandlerClass=server.BackPipeServer).serve_forever()
+        try:
+            print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Starting server ...")
+            print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Press {Fore.LIGHTRED_EX}Ctrl + C{Fore.RESET} to quit.\n")
+            backpipe_server = Server(self.get, self.post, self.put, self.patch, self.delete, self.unknown, ratelimit=(self.ratelimit, self.ratelimit_message),server_address=(self.addr, self.port), RequestHandlerClass=server.BackPipeServer)
+            backpipe_server.serve_forever()
+        except KeyboardInterrupt:
+            print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} EXIT {Back.RESET}{Fore.RESET} Received Keyboard interrupt, shutting down server.")
+            server.clearing_thread.kill()
