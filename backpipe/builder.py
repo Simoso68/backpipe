@@ -1,6 +1,7 @@
 import backpipe.server as server
 from .host import Server
 from colorama import Fore, Back, init
+from .defaults import *
 
 init()
 
@@ -8,14 +9,14 @@ class BackPipeBuilder():
     def __init__(self, addr, port) -> None:
         self.addr = addr
         self.port = port
-        self.get = server.undefined
-        self.post = server.undefined
-        self.put = server.undefined
-        self.patch = server.undefined
-        self.delete = server.undefined
-        self.unknown = server.unknown_method
+        self.get = undefined
+        self.post = undefined
+        self.put = undefined
+        self.patch = undefined
+        self.delete = undefined
+        self.unknown = unknown_method
         self.ratelimit = -1
-        self.ratelimit_message = server.ratelimited_default
+        self.ratelimit_message = ratelimited_default
     def set_get(self, f):
         self.get = f
     def set_post(self, f):

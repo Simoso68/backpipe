@@ -1,0 +1,10 @@
+from .rq import Request
+
+def undefined(r: Request):
+    return (200, "Undefined")
+
+def unknown_method(r: Request):
+    return (405, f"Method {r.method} is not supported.")
+
+def ratelimited_default(r: Request):
+    return (429, "Too many requests from the same client.")
