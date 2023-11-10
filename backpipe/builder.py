@@ -43,3 +43,13 @@ class BackPipeBuilder():
         except KeyboardInterrupt:
             print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} EXIT {Back.RESET}{Fore.RESET} Received Keyboard interrupt, shutting down server.")
             server.clearing_thread.kill()
+        except Exception as x:
+            print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} CRASH {Back.RESET}{Fore.RESET} {Fore.BLUE}{type(x).__name__}{Fore.RESET}: {Fore.LIGHTBLUE_EX}{x}{Fore.RESET}")
+            try:
+                backpipe_server.shutdown()
+            except Exception:
+                pass
+            try:
+                server.clearing_thread.kill()
+            except Exception:
+                pass
