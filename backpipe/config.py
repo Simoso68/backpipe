@@ -27,5 +27,8 @@ class Config():
         if not isinstance(val, bool):
             raise TypeError(f"value must be of type 'bool' not '{type(val).__name__}'")
         self.use_html_header = val
-
+    def __str__(self):
+        return f"Config(address='{self.default_address}', port={self.default_port}, activate_html={self.use_html_header})"
+    def __repr__(self) -> str:
+        return self.__str__()
 config = Config()
