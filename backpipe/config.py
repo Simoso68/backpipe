@@ -31,4 +31,5 @@ class Config():
         return f"Config(address='{self.default_address}', port={self.default_port}, activate_html={self.use_html_header})"
     def __repr__(self) -> str:
         return self.__str__()
+    
 config = Config()
