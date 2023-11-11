@@ -16,3 +16,7 @@ class Request():
                 break
             raw_headers[h.split(":")[0]] = h.split(":", 1)[1][1:]
         self.headers: dict = raw_headers
+    def __str__(self) -> str:
+        return f"Request({self.address}:{self.port})"
+    def __repr__(self) -> str:
+        return self.__str__()
