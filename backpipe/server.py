@@ -5,8 +5,10 @@ from colorama import Back, Fore , init
 from typing import Any
 from multiprocessing import Process
 from time import sleep
+
 from .rq import Request
 from .host import Server as BackPipeHoster
+from .config import config
 
 init()
 
@@ -76,6 +78,8 @@ class BackPipeServer(SimpleHTTPRequestHandler):
         if not isinstance(answer[0], int):
             raise TypeError(f"HTTP status code must be 'int' not '{type(answer[0]).__name__}'")
         self.send_response(answer[0])
+        if config.use_html_header:
+            self.send_header("Content-Type", "text/html")
         self.end_headers()
         if isinstance(answer[1], str):
             self.wfile.write(answer[1].encode())

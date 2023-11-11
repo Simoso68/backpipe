@@ -1,11 +1,21 @@
 from .builder import BackPipeBuilder
+from .config import config
 
 class BackPipe():
     """
     The class, that is the instance of your API server.
     """
-    def __init__(self, address: str = "", port: int = 3000) -> None:
-        self.__builder__ = BackPipeBuilder(address, port)
+    def __init__(self, address = None, port = None) -> None:
+        if address == None:
+            set_address = config.default_address
+        else:
+            set_address = address
+        if port == None:
+            set_port = config.default_port
+        else:
+            set_port = port
+            
+        self.__builder__ = BackPipeBuilder(set_address, set_port)
     def __str__(self) -> str:
         return f"BackPipe(address='{self.__builder__.addr}', port={self.__builder__.port})"
     def __repr__(self) -> str:

@@ -14,5 +14,6 @@ https://pypi.org/project/backpipe
 
 from .app import BackPipe
 from .rq import Request
+from .config import config
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
