@@ -30,13 +30,14 @@ setup(
     ],
     url="https://github.com/Simoso68/backpipe",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Natural Language :: English"
+        "Natural Language :: English",
+        "Environment :: Console"
     ],
     entry_points={
         "console_scripts": ["backpipe = backpipe.__main__:main"]

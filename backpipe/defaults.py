@@ -8,3 +8,6 @@ def unknown_method(r: Request):
 
 def ratelimited_default(r: Request):
     return (429, "Too many requests from the same client.")
+
+def blocked_default(r: Request):
+    return (403, "Your client has been blocked.")

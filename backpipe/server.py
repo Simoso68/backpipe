@@ -39,10 +39,16 @@ class BackPipeServer(SimpleHTTPRequestHandler):
             # RATE LIMIT CHECKING
             ratelimit = self.server.ratelimit
 
+            if self.client_address[0] in self.server.blocked_addresses:
+                print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Lastest request from {self.client_address[0]} was blocked (Address blocked).{Fore.RESET}")
+                answer = self.server.blocked_msg(Request(self.client_address, self.path, self.headers, self.command))
+                self.handlerq(answer)
+                return
+
             try:
                 if not ratelimit < 0:
                     if self.server.client_rq_minute[self.client_address[0]] >= ratelimit:
-                        print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Last request from {self.client_address[0]} was blocked (Rate-Limit).{Fore.RESET}")
+                        print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Lastest request from {self.client_address[0]} was blocked (Rate-Limit).{Fore.RESET}")
                         answer = self.server.ratelimit_msg(Request(self.client_address, self.path, self.headers, self.command))
                         self.handlerq(answer)
                         return

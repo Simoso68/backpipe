@@ -3,6 +3,7 @@
 from colorama import Fore, Back, init
 from sys import argv, exit
 from os import mkdir, path
+from subprocess import run
 from json import loads
 from packaging.version import Version
 
@@ -99,8 +100,6 @@ server.run()""")
             exit()
     elif "update" in argv[1:]:
         try:
-            from subprocess import run
-
             run(["pip", "install", "--upgrade", "backpipe"])
         except Exception as x:
             err(f"{Fore.BLUE}{type(x).__name__}{Fore.RESET}: {Fore.LIGHTBLUE_EX}{x}{Fore.RESET}")

@@ -93,5 +93,15 @@ class BackPipe():
         def wrapper():
             self.__builder__.set_all(function)
         return wrapper()
+    def block(self, function):
+        """
+        Set the request handler for client's with blocked IP addresses.
+        Block an IP address by using {server_instance_name}.block("addr1", "addr2") ...
+        """
+        def wrapper():
+            self.__builder__
+        return wrapper()
+    def block_address(self, *addresses):
+        self.__builder__.block_address(addresses)
     def run(self):
         self.__builder__.run()
