@@ -1,13 +1,18 @@
 from setuptools import setup
-from backpipe import __version__
 
 def requires_mod():
     raw = open("dev-requirements/python.txt", "r").read()
     return raw.splitlines()
 
+def get_version():
+    raw = open("backpipe/__init__.py", "r").read()
+    for ln in raw.splitlines():
+        if ln.startswith("__version__ = "):
+            return ln[15:-1]
+
 setup(
     name="backpipe",
-    version=__version__,
+    version=get_version(),
     description="A backend HTTP framework for Python.",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
@@ -32,5 +37,8 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Natural Language :: English"
-    ]
+    ],
+    entry_points={
+        "console_scripts": ["backpipe = backpipe.__main__:main"]
+    }
 )
