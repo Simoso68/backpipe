@@ -1,41 +1,32 @@
-# Bug Report
+---
+name: Bug report
+about: Create a report to help us improve
+title: Bug Report
+labels: ''
+assignees: ''
 
-## General information
+---
 
-### Operating System
-<!--Answer in the text field below-->
-```
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-```
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-### Python Version
-<!--Answer in the text field below-->
-```
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-```
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-### Module Version
-<!--Answer in the text field below-->
-```
+**Desktop (please complete the following information):**
+ - OS:
+ - Python Version: 
+ - Backpipe Version
 
-```
-
-### Backpipe Module Version
-<!--Answer in the text field below-->
-```
-
-```
-
-## Explanation
-
-<!--Explain what the bug causes for issues, if you want, you can provide screenshots-->
-
-## Steps to reproduce
-<!--Explain the steps on how to reproduce the issue using the given format below-->
-<!--If you want, you can provide screenshots-->
-
-- Step 1: You need to ...
-- Step 2: And then you need to ...
-
-## Additional information
-<!--Additional information about the issue-->
+**Additional context**
+Add any other context about the problem here.
