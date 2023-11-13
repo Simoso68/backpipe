@@ -1,13 +1,20 @@
-# Feature Request
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
 
-## Feature explanaition
-<!--Explain, what feature you want to add, how it should be named, what it can do, etc.-->
-<!--Go in to as much depth as possible, so we can understand the requested feature and the given reasons, why we should add it-->
+---
 
-## Code
-<!--Code snippets you provided, on how the feature could be made-->
-<!--You don't need to provide code snippets, if you can not-->
-<!--If the given code is not a small snippet, but the entire feature itself, you should open a pull request-->
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-## Additional information
-<!--Additional information about the requested feature-->
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
