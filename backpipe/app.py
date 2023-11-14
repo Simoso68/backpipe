@@ -1,5 +1,6 @@
 from .builder import BackPipeBuilder
 from .config import config
+from .uptime import _uptime
 
 class BackPipe():
     """
@@ -37,6 +38,11 @@ class BackPipe():
         def wrapper():
             self.__builder__.ratelimit_message = function
         return wrapper()
+    def uptime(self):
+        """
+        Uptime counter starts when the server is started.
+        """
+        return _uptime(self.__builder__)
     def get(self, function):
         """
         Set the GET request handler.

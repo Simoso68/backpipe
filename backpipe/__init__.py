@@ -16,4 +16,4 @@ from .app import BackPipe
 from .rq import Request
 from .config import config
 
-__version__ = "0.3.5"
+__version__ = "0.3.6"

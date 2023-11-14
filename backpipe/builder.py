@@ -19,6 +19,8 @@ class BackPipeBuilder():
         self.block_addrs = []
         self.ratelimit = -1
         self.ratelimit_message = ratelimited_default
+
+        self.started_at = 0
     def set_get(self, f):
         self.get = f
     def set_post(self, f):
@@ -45,7 +47,7 @@ class BackPipeBuilder():
         try:
             print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Starting server ...")
             print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Press {Fore.LIGHTRED_EX}Ctrl + C{Fore.RESET} to quit.\n")
-            backpipe_server = Server(self.get, self.post, self.put, self.patch, self.delete, self.unknown, self.blocked_msg, self.block_addrs, ratelimit=(self.ratelimit, self.ratelimit_message),server_address=(self.addr, self.port), RequestHandlerClass=BackPipeServer)
+            backpipe_server = Server(self, self.get, self.post, self.put, self.patch, self.delete, self.unknown, self.blocked_msg, self.block_addrs, ratelimit=(self.ratelimit, self.ratelimit_message),server_address=(self.addr, self.port), RequestHandlerClass=BackPipeServer)
             backpipe_server.serve_forever()
         except KeyboardInterrupt:
             print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} EXIT {Back.RESET}{Fore.RESET} Received Keyboard interrupt, shutting down server.")

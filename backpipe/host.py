@@ -1,11 +1,14 @@
 from socketserver import TCPServer
 from multiprocessing import Process
-from time import sleep
+from time import sleep, time
 from colorama import Fore, Back
 
 class Server(TCPServer):
-    def __init__(self, get, post, put, patch, delete, unknown, blocked_msg, blocked_addrs, server_address, ratelimit: tuple, RequestHandlerClass, bind_and_activate: bool = True) -> None:
+    def __init__(self, context, get, post, put, patch, delete, unknown, blocked_msg, blocked_addrs, server_address, ratelimit: tuple, RequestHandlerClass, bind_and_activate: bool = True) -> None:
         super().__init__(server_address, RequestHandlerClass, bind_and_activate)
+
+        context.started_at = time()
+
         self.get = get
         self.post = post
         self.put = put
