@@ -15,5 +15,8 @@ https://pypi.org/project/backpipe
 from .app import BackPipe
 from .rq import Request
 from .config import config
+from colorama import init as __init
 
-__version__ = "0.3.6"
+__init()
+
+__version__ = "0.4.0"

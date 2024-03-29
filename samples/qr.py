@@ -1,17 +1,15 @@
-# THIS SCRIPT REQUIRES THE 'qrcode' module.
+# THIS SCRIPT REQUIRES THE 'qrcode' and 'cairosvg' modules.
 import qrcode
 import qrcode.image.svg
+import cairosvg
 import backpipe
 
 server = backpipe.BackPipe()
 
 @server.any
 def answer(r: backpipe.Request):
-    try:
-        txt = r.path[1:]
-        response = qrcode.make(txt, image_factory=qrcode.image.svg.SvgImage).to_string()
-    except KeyError:
-        return (400, "text header is required.")
-    return (200, response)
+    txt = r.path[1:]
+    svg = qrcode.make(txt, image_factory=qrcode.image.svg.SvgImage).to_string()
+    return (200, cairosvg.svg2png(svg))
 
 server.run()

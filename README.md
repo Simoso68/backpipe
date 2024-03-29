@@ -9,11 +9,18 @@
 <img src="https://img.shields.io/github/repo-size/Simoso68/backpipe?color=green">
 <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2FSimoso68%2Fbackpipe%2Flanguages&query=Python&label=characters&color=green">
 
-
 <br>
 </div>
 
 <div align=center><pre><code>pip install backpipe</code></pre></div>
+
+## Info
+
+Backpipe tries to support all operating systems. \
+But its primary focus lies on Linux support, \
+as it is the main choice for website hosting. \
+\
+Running it on Windows might lead to issues and is not recommended.
 
 ## Why the name?
 
@@ -78,6 +85,25 @@ def login(r: backpipe.Request):
 
 server.run()
 ```
+
+### Using Request Bodies
+
+```python
+import backpipe
+
+server = backpipe.BackPipe()
+
+@server.post
+def respond(r: backpipe.Request):
+    return (200, r.body) # Returns the clients's request body
+
+server.run()
+```
+
+## Known issues
+
+- URI-too-long message raises error on client-side when using Python requests
+- Limited client information on URI-too-long message (probably unfixable.)
 
 ## License
 

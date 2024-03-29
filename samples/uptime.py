@@ -1,9 +1,9 @@
-from backpipe import *
+import backpipe
 
-server = BackPipe()
+server = backpipe.BackPipe()
 
 @server.get
-def respond(r):
+def respond(r: backpipe.BackPipe):
     return (200, str(server.uptime()))
 
 server.run()
