@@ -10,9 +10,8 @@
 <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2FSimoso68%2Fbackpipe%2Flanguages&query=Python&label=characters&color=green">
 
 <br>
+<pre><code>pip install backpipe</code></pre>
 </div>
-
-<div align=center><pre><code>pip install backpipe</code></pre></div>
 
 ## Info
 
