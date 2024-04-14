@@ -3,7 +3,7 @@ import backpipe
 server = backpipe.BackPipe()
 
 @server.get
-def coinflip(r: backpipe.Request):
+def respond(r: backpipe.Request):
     return (200, "Looks like you didn't exceed the URI limit!")
 
 server.set_uri_limit(100)

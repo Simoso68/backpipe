@@ -10,6 +10,7 @@ class BackPipeBuilder():
     def __init__(self, addr, port) -> None:
         self.addr = addr
         self.port = port
+        self.https = None
         self.get = undefined
         self.post = undefined
         self.put = undefined
@@ -61,7 +62,7 @@ class BackPipeBuilder():
                 print(f"\r{Back.YELLOW}{Fore.BLACK} COMPATIBILITY {Back.RESET}{Fore.RESET} Running Backpipe servers on Windows might lead to issues")
             print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Starting server ...")
             print(f"\r{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET}{Fore.RESET} Press {Fore.LIGHTRED_EX}Ctrl + C{Fore.RESET} to quit.\n")
-            backpipe_server = Server(self, self.get, self.post, self.put, self.patch, self.delete, self.unknown, self.uri_limit, self.uri_limit_message, self.blocked_msg, self.block_addrs, ratelimit=(self.ratelimit, self.ratelimit_message, self.ratelimit_reset, self.ratelimit_exc_addrs, self.ratelimit_exc_paths), server_address=(self.addr, self.port), RequestHandlerClass=BackPipeServer)
+            backpipe_server = Server(self, self.https, self.get, self.post, self.put, self.patch, self.delete, self.unknown, self.uri_limit, self.uri_limit_message, self.blocked_msg, self.block_addrs, ratelimit=(self.ratelimit, self.ratelimit_message, self.ratelimit_reset, self.ratelimit_exc_addrs, self.ratelimit_exc_paths), server_address=(self.addr, self.port), RequestHandlerClass=BackPipeServer)
             backpipe_server.serve_forever()
         except KeyboardInterrupt:
             print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} EXIT {Back.RESET}{Fore.RESET} Received Keyboard interrupt, shutting down server.")

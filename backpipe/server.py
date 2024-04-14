@@ -91,6 +91,14 @@ class BackPipeServer(SimpleHTTPRequestHandler):
             self.close_connection = True
             return
     def handlerq(self, answer):
+        """TODO
+        if self.server.https != None:
+            if self.headers.get("X-Forwarded-Proto", "http") == "http":
+                print("YES")
+                self.send_response(301)
+                self.send_header('Location', 'https://{}{}'.format(self.server.server_address[0], self.path))
+                self.end_headers()
+        """
         if not isinstance(answer[0], int):
             raise TypeError(f"HTTP status code must be 'int' not '{type(answer[0]).__name__}'")
         self.send_response(answer[0])

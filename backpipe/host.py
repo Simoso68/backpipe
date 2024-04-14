@@ -1,12 +1,19 @@
 from socketserver import TCPServer
-from multiprocessing import Process
 from threading import Thread
 from time import sleep, time
 from colorama import Fore, Back
+import ssl
 
 class Server(TCPServer):
-    def __init__(self, context, get, post, put, patch, delete, unknown, uri_limit, uri_limited_msg, blocked_msg, blocked_addrs, server_address, ratelimit: tuple, RequestHandlerClass, bind_and_activate: bool = True) -> None:
+    def __init__(self, context, https: dict | None, get, post, put, patch, delete, unknown, uri_limit, uri_limited_msg, blocked_msg, blocked_addrs, server_address, ratelimit: tuple, RequestHandlerClass, bind_and_activate: bool = True) -> None:
         super().__init__(server_address, RequestHandlerClass, bind_and_activate)
+
+        if https != None:
+            self.ssl = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+            self.ssl.load_cert_chain(https["certfile"], https["keyfile"])
+            self.socket = self.ssl.wrap_socket(self.socket, server_side=True)
+
+        self.https = https
 
         context.started_at = time()
 

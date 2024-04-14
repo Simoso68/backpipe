@@ -21,6 +21,14 @@ class BackPipe():
         return f"BackPipe(address={self.__builder__.addr.__repr__()}, port={self.__builder__.port})"
     def __repr__(self) -> str:
         return self.__str__()
+    # HTTPS support still in Development, uncomment it, if you want to test it.
+    #def enable_https(self, certfile, keyfile):
+    #    """
+    #    Offers integrated SSL support.
+    #    Certfiles and Keyfiles can be generated using OpenSSL.
+    #    Tools such as CURL or your web browser will raise warnings, that the connection is unsafe if you self-sign your certificate.
+    #    """
+    #    self.__builder__.https = {"certfile":certfile, "keyfile":keyfile}
     def set_ratelimit(self, limit: int):
         """
         Set a rate limit for how many requests from one IP address are allowed per minute.

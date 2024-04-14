@@ -105,6 +105,15 @@ server.run()
 - URI-too-long message raises error on client-side when using Python requests
 - Limited client information on URI-too-long message (probably unfixable.)
 
+## HTTPS notice
+
+When activating HTTPS, you need to sign your certificate file \
+with a key provided by a trusted authority. \
+\
+Self-signing your certificate will make tools such as \
+CURL, your Browser, etc. raise a warning, \
+that the website may be unsafe.
+
 ## License
 
 Backpipe is licensed under the GNU GPL v3.
