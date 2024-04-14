@@ -9,8 +9,7 @@ class HTML():
         self.__data__ = "<DOCTYPE html>"
         self.__head__ = ""
         self.__body__ = ""
-        self.__title__ = "<title>Response</title>"
-    def text(self) -> str:
+    def text(self):
         return f"{self.__data__}<html><head>{self.__head__}</head><body>{self.__body__}</body></html>"
     def add_tag(self, tag: str, inner: str, params: dict = {}):
         self.__body__ += _addTag(tag, inner, params)

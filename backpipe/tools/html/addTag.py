@@ -1,7 +1,6 @@
 from backpipe.tools.check_type import check
 
 def addTag(tag, inner, params):
-
     check(tag, str, "tag")
     check(inner, str, "inner HTML")
     check(params, dict, "element parameters")
