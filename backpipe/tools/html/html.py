@@ -1,5 +1,6 @@
 from backpipe.tools.html.addTag import addTag as _addTag
 from backpipe.tools.html.addMeta import addMeta as _addMeta
+from backpipe.tools.html.addStyle import addStyle as _addStyle
 
 class HTML():
     """
@@ -17,3 +18,5 @@ class HTML():
         self.__head__ += _addTag(tag, inner, params)
     def add_meta_tag(self, name, content):
         self.__head__ += _addMeta(name, content)
+    def add_style(self, css: str):
+        self.__head__ += _addStyle(css)
