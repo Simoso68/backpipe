@@ -1,3 +1,4 @@
 include backpipe/tools/*
 include backpipe/tools/json/*
 include backpipe/tools/html/*
+include backpipe/tools/base64/*
