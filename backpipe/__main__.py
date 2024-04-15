@@ -74,7 +74,8 @@ backpipe -h / --help        This message.
 backpipe -v / --version     Display the current version of backpipe.
 backpipe new                BackPipe project template.
 backpipe exec               Executes your BackPipe project.
-backpipe update             Update backpipe using pip.""")
+backpipe update             Update backpipe using pip.
+backpipe host               Host a preset server.""")
         exit()
     
     elif "host" in argv[1:]:

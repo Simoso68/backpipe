@@ -19,6 +19,8 @@ from .rq import Request
 from .config import config
 from colorama import init as __init
 
+import backpipe.tools as tools
+
 __init()
 
 __version__ = "0.4.2"
