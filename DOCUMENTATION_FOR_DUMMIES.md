@@ -34,9 +34,6 @@ server = BackPipe()
 server = BackPipe(addr="", port=3000)
 ```
 
-> [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
-
 **Running your server**
 
 ```py
