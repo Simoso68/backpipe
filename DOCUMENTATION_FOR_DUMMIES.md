@@ -79,7 +79,7 @@ server.run()
 
 Each function, which is used as a request responder needs to return a tuple. \
 The first value of the tuple is the HTTP status code and has to be an integer. \
-The second value can be either a string or bytes, this is the body, that gets sent back to the client. \
+The second value can be either a string or bytes, this is the body, that gets sent back to the client. 
 
 **Example:**
 
@@ -94,7 +94,7 @@ Learn more about status code [here](https://en.wikipedia.org/wiki/List_of_HTTP_s
 ### Responding the any request, that is GET, POST, PATCH, PUT, DELETE
 
 > [!IMPORTANT]  
-> @server.any overrides any other GET, POST, PATCH, PUT, DELETE responder
+> @server.any overrides any other GET, POST, PATCH, PUT, DELETE responder \
 > All of these need to be defined after the Any-Responder
 
 ```py
