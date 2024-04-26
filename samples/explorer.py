@@ -20,7 +20,7 @@ def respond(r: backpipe.Request):
             return (404, "File not found.")
     
         if os.path.isdir(PATH):
-            HTML = "<!DOCTYPE html>\n"
+            HTML = tools.html.HTML()
 
             if r.path == "/":
                 CURRENT_DIR = r.path[:-1]
@@ -28,8 +28,8 @@ def respond(r: backpipe.Request):
                 CURRENT_DIR = r.path
 
             for o in os.listdir(PATH):
-                HTML += f"<a href='{CURRENT_DIR + f"/{o}"}'>{o}</a><br>"
-            return (200, HTML)
+                HTML.add_tag("p", o)
+            return (200, HTML.text())
         else:
             return (200, open(PATH, "rb").read())
     except PermissionError:

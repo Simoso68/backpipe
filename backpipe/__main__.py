@@ -8,6 +8,7 @@ from json import loads
 from packaging.version import Version
 
 from backpipe import __version__
+from backpipe.presets import PRESET_MNGR
 
 init()
 
@@ -22,46 +23,6 @@ def warn(msg):
 
 def crash(exc):
     print(f"\r{Back.LIGHTRED_EX}{Fore.BLACK} CRASH {Back.RESET}{Fore.RESET} {Fore.BLUE}{type(exc).__name__}{Fore.RESET}: {Fore.LIGHTBLUE_EX}{exc}{Fore.RESET}")
-
-def file_hoster(addr, port):
-    # Give Root/Admin Permissions for full access
-    # This script uses newer F-String features provided by Python 3.12
-
-    import backpipe
-    import os
-    import platform
-    import urllib
-
-    server = backpipe.BackPipe(addr, port)
-
-    @server.get
-    def respond(r: backpipe.Request):
-        try: 
-            if platform.system() == "Windows":
-                PATH = urllib.parse.unquote(f"C:{r.path}")
-            else:
-                PATH = urllib.parse.unquote(r.path)
-
-            if not os.path.exists(PATH):
-                return (404, "File not found.")
-    
-            if os.path.isdir(PATH):
-                HTML = "<!DOCTYPE html>\n"
-
-                if r.path == "/":
-                    CURRENT_DIR = r.path[:-1]
-                else:
-                    CURRENT_DIR = r.path
-
-                for o in os.listdir(PATH):
-                    HTML += f"<a href='{CURRENT_DIR + f"/{o}"}'>{o}</a><br>"
-                return (200, HTML)
-            else:
-                return (200, open(PATH, "rb").read())
-        except PermissionError:
-            return (403, "Can not access object")
-    
-    server.run()
 
 def main():
     if "-v" in argv[1:] or "--version" in argv[1:]:
@@ -80,11 +41,11 @@ backpipe host               Host a preset server.""")
     
     elif "host" in argv[1:]:
         print("Available presets: ")
-        for preset in ("file",): # More will be added soon
+        for preset in PRESET_MNGR.listPresets():
             print(f"- {preset}")
         TYPE = input("What server preset do you want to host?: ")
-        if TYPE == "file":
-            SERVER = file_hoster
+        if TYPE in PRESET_MNGR.listPresets():
+            info("preset found")
         else:
             err("preset does not exist", "UNKNOWN")
             return
@@ -96,9 +57,10 @@ backpipe host               Host a preset server.""")
             int(PORT)
         except ValueError:
             err("port must be a number")
+            return
 
         try:
-            SERVER(ADDR, int(PORT))
+            PRESET_MNGR.execPreset(TYPE, ADDR, int(PORT))
             return
         except Exception as server_exc:
             crash(server_exc)

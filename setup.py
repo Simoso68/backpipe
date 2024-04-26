@@ -20,13 +20,22 @@ setup(
     maintainer="Simoso68",
     license="GNU GPL v3",
     install_requires=requires_mod(),
-    packages=["backpipe"],
+    include_package_data=True,
+    packages=["backpipe", 
+        "backpipe.presets",
+        "backpipe.tools",
+        "backpipe.tools.base64",
+        "backpipe.tools.file",
+        "backpipe.tools.hash",
+        "backpipe.tools.html",
+        "backpipe.tools.json",
+        ],
     keywords=[
         "framework",
         "http",
         "web",  
         "api", 
-        "server"
+        "server",
     ],
     url="https://github.com/Simoso68/backpipe",
     classifiers=[
@@ -36,7 +45,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",
         "Natural Language :: English",
-        "Environment :: Console"
+        "Environment :: Console",
     ],
     entry_points={
         "console_scripts": ["backpipe = backpipe.__main__:main"]
