@@ -7,7 +7,7 @@ class HTML():
     Simple HTML builder.
     """
     def __init__(self):
-        self.__data__ = "<DOCTYPE html>"
+        self.__data__ = "<!DOCTYPE html>"
         self.__head__ = ""
         self.__body__ = ""
     def text(self) -> str:
@@ -16,6 +16,10 @@ class HTML():
         self.__body__ += _addTag(tag, inner, params)
     def add_head_tag(self, tag: str, inner: str, params: dict = {}):
         self.__head__ += _addTag(tag, inner, params)
+    def add_tag_self_closing(self, tag: str, params: dict = {}):
+        self.__body__ += _addTag(tag, "", params).replace(f"</{tag}>", "")
+    def add_head_tag_self_closing(self, tag: str, params: dict = {}):
+        self.__head__ += _addTag(tag, "", params).replace(f"</{tag}>", "")
     def add_meta_tag(self, name, content):
         self.__head__ += _addMeta(name, content)
     def add_style(self, css: str):

@@ -28,7 +28,7 @@ def file_hoster(addr, port):
                 return (404, "file not found.")
     
             if os.path.isdir(PATH):
-                HTML = "<!DOCTYPE html>\n"
+                HTML = backpipe.tools.html.HTML()
 
                 if r.path == "/":
                     CURRENT_DIR = r.path[:-1]
@@ -36,7 +36,7 @@ def file_hoster(addr, port):
                     CURRENT_DIR = r.path
 
                 for o in os.listdir(PATH):
-                    HTML += f"<a href='{CURRENT_DIR}" + "/" + o + "}" + f"'>{o}</a><br>"
+                    HTML.add_tag("a", o, {"href":f"{CURRENT_DIR}/{o}"})
                 return (200, HTML.text())
             else:
                 return (200, open(PATH, "rb").read())
