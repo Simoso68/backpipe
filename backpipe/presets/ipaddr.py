@@ -9,7 +9,7 @@ def ipaddr_hoster(addr, port):
     
     @server.unknown
     def unknown_method(r: backpipe.Request):
-        return wrong_method(r)
+        return (405, f"unsupported method: {r.method}, use GET")
 
     @server.get
     def respond(r: backpipe.Request):
