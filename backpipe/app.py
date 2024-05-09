@@ -21,6 +21,8 @@ class BackPipe():
         return f"BackPipe(address={self.__builder__.addr.__repr__()}, port={self.__builder__.port})"
     def __repr__(self) -> str:
         return self.__str__()
+    def __eq__(self, other) -> bool:
+        return isinstance(other, BackPipe) and self.__dict__ == other.__dict__
     # HTTPS support still in Development, uncomment it, if you want to test it.
     #def enable_https(self, certfile, keyfile):
     #    """
@@ -45,7 +47,7 @@ class BackPipe():
         """
         def wrapper():
             self.__builder__.ratelimit_message = function
-        return wrapper()
+        return wrapper
     def set_ratelimit_reset_interval(self, time):
         """
         Set a time, that determines how long it takes until the ratelimits are reset.
@@ -105,42 +107,42 @@ class BackPipe():
         """
         def wrapper():
             self.__builder__.set_get(function)
-        return wrapper()
+        return wrapper
     def post(self, function):
         """
         Set the POST request handler.
         """
         def wrapper():
             self.__builder__.set_post(function)
-        return wrapper()
+        return wrapper
     def put(self, function):
         """
         Set the PUT request handler.
         """
         def wrapper():
             self.__builder__.set_put(function)
-        return wrapper()
+        return wrapper
     def patch(self, function):
         """
         Set the PATCH request handler.
         """
         def wrapper():
             self.__builder__.set_patch(function)
-        return wrapper()
+        return wrapper
     def delete(self, function):
         """
         Set the DELETE request handler.
         """
         def wrapper():
             self.__builder__.set_delete(function)
-        return wrapper()
+        return wrapper
     def unknown(self, function):
         """
         If an unknown method is used, the set function will handle it.
         """
         def wrapper():
             self.__builder__.set_unknown(function)
-        return wrapper()
+        return wrapper
     def any(self, function):
         """
         Set the handler for GET, POST, PUT, PATCH, DELETE.
@@ -154,7 +156,7 @@ class BackPipe():
         """
         def wrapper():
             self.__builder__.set_all(function)
-        return wrapper()
+        return wrapper
     def block(self, function):
         """
         Set the request handler for client's with blocked IP addresses.
@@ -162,7 +164,7 @@ class BackPipe():
         """
         def wrapper():
             self.__builder__.blocked_msg = function
-        return wrapper()
+        return wrapper
     def block_address(self, *addresses):
         self.__builder__.block_address(addresses)
     def run(self):

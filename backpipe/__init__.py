@@ -16,11 +16,12 @@ https://pypi.org/project/backpipe
 
 from .app import BackPipe
 from .rq import Request
-from .config import config
+from backpipe.config import config
+from backpipe.redirect import redirect
 from colorama import init as __init
 
 import backpipe.tools as tools
 
 __init()
 
-__version__ = "0.5.1"
+__version__ = "0.6.0"
