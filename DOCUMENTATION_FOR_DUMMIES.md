@@ -51,7 +51,7 @@ from backpipe import *
 
 server = BackPipe(addr="", port=3000)
 
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, "Hello World!")
 
@@ -68,7 +68,7 @@ from backpipe import *
 
 server = BackPipe(addr="", port=3000)
 
-@server.post
+@server.post()
 def respond(r: Request):
     return (200, "Hello World!")
 
@@ -84,7 +84,7 @@ The second value can be either a string or bytes, this is the body, that gets se
 **Example:**
 
 ```py
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, "I'm the response body!")
 ```
@@ -98,7 +98,7 @@ Learn more about status code [here](https://en.wikipedia.org/wiki/List_of_HTTP_s
 > All of these need to be defined after the Any-Responder
 
 ```py
-@server.any
+@server.any()
 def respond(r: Request):
     return (200, "Try it with GET, POST, PATCH, PUT, DELETE and you'll get the same response!")
 ```
@@ -109,7 +109,7 @@ def respond(r: Request):
 > This might be useful when using @server.unknown, to know what method the client uses
 
 ```py
-@server.any
+@server.any()
 def respond(r: Request):
     return (200, f"You used the {r.method} method!")
 ```
@@ -117,11 +117,11 @@ def respond(r: Request):
 ### Working with methods, which are not officially supported.
 
 ```py
-@server.any
+@server.any()
 def respond(r: Request):
     return (200, "You used a supported method!")
 
-@server.unknown
+@server.unknown()
 def unknown_method_respond(r: Request):
     if r.method == "SECRET":
         return (200, "You found the secret method!")
@@ -134,7 +134,7 @@ def unknown_method_respond(r: Request):
 **Responds with the path, you used to access the website**
 
 ```py
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, f"Path: {r.path}")
 ```
@@ -146,7 +146,7 @@ from backpipe import *
 
 server = BackPipe(addr="", port=3000)
 
-@server.get
+@server.get()
 def respond(r: Request):
     if r.path == "/":
         return (200, "Welcome to the Homepage")
@@ -171,7 +171,7 @@ The request body is usually in JSON or plain text format
 **Example, which sends back the request body**
 
 ```py
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, r.body)
 ```
@@ -188,7 +188,7 @@ server = BackPipe(addr="", port=3000)
 
 stuff_list = []
 
-@server.post
+@server.post()
 def respond(r: Request):
     if r.path == "/api":
         data = tools.json.deserialize(r.body.decode())
@@ -215,7 +215,7 @@ server.run()
 **Code, that returns the 'User-Agent' header**
 
 ```py
-@server.post
+@server.post()
 def respond(r: Request):
     try:
         return (200, r.headers["User-Agent"])
@@ -232,7 +232,7 @@ server = BackPipe(addr="", port=3000)
 
 stuff_list = []
 
-@server.post
+@server.post()
 def respond(r: Request):
     try:
         if "Linux" in r.headers["User-Agent"]:
@@ -254,7 +254,7 @@ from backpipe import *
 
 server = BackPipe(addr="", port=3000)
 
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, r.address)
 
@@ -270,7 +270,7 @@ from backpipe import *
 
 server = BackPipe(addr="", port=3000)
 
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, r.port)
 
@@ -286,7 +286,7 @@ The path query is set by the path used by the client.
 **Getting a query**
 
 ```py
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, f"{r.params}")
 ```
@@ -305,9 +305,41 @@ you can use Request.raw_path. \
 **How to implement it into a responder**
 
 ```py
-@server.get
+@server.get()
 def respond(r: Request):
     return (200, r.raw_path)
 ```
 
 You can use the Request.raw_path variable like any other provided by the Request class.
+
+### Redirecting
+
+Redirecting is possible by returning the redirect() object in your response function. \
+The redirect function returns a BackPipeRedirect() object, which specifies where the client should be redirected to and with what message.
+
+**Full Example**
+
+```py
+from backpipe import *
+
+config.html(True)
+
+server = BackPipe()
+
+@server.any()
+def wrong_method(r: Request):
+    return (405, f"method '{r.method}' is not allowed")
+
+@server.unknown()
+def unknown_method(r: Request):
+    return (405, f"method '{r.method}' is not allowed")
+
+@server.get()
+def respond(r: Request):
+    if r.path == "/github":
+        return redirect("https://github.com/Simoso68/backpipe", "<p>Moved to </p><a href='https://github.com/Simoso68/backpipe'>GitHub</a>")
+    else:
+        return (200, "Hello this is my page.")
+
+server.run()
+```
