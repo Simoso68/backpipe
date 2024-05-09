@@ -6,6 +6,7 @@ from typing import Any
 from .rq import Request
 from .host import Server as BackPipeHoster
 from .config import config
+from .redirect import BackPipeRedirect
 
 init()
 
@@ -99,6 +100,17 @@ class BackPipeServer(SimpleHTTPRequestHandler):
                 self.send_header('Location', 'https://{}{}'.format(self.server.server_address[0], self.path))
                 self.end_headers()
         """
+        if isinstance(answer, BackPipeRedirect):
+            self.send_response(301)
+            self.send_header("Location", answer.location)
+            if config.use_html_header:
+                self.send_header("Content-Type", "text/html")
+            self.end_headers()
+            if isinstance(answer.message, str):
+                self.wfile.write(answer.message.encode())
+            else:
+                self.wfile.write(answer.message)
+            return
         if not isinstance(answer[0], int):
             raise TypeError(f"HTTP status code must be 'int' not '{type(answer[0]).__name__}'")
         self.send_response(answer[0])

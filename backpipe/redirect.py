@@ -11,5 +11,5 @@ class BackPipeRedirect():
 
 def redirect(location: str, message: str) -> BackPipeRedirect:
     check(location, str, "location")
-    check(message, str, "message")
+    check(message, (str, bytes), "message")
     return BackPipeRedirect(location, message)
