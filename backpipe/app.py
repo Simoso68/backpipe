@@ -1,6 +1,7 @@
 from .builder import BackPipeBuilder
 from .config import config
 from .uptime import _uptime
+from backpipe.tools.check_type import check
 
 class BackPipe():
     """
@@ -53,28 +54,25 @@ class BackPipe():
         Set a time, that determines how long it takes until the ratelimits are reset.
         Default is 60.
         """
-        if not isinstance(time, (int, float)):
-            raise TypeError(f"specified time must be 'int' or 'float' not '{type(time).__name__}'")
-        else:
-            self.__builder__.ratelimit_reset = time
+        check(time, (int, float), "time")
+            
+        self.__builder__.ratelimit_reset = time
     def ratelimit_exception_ipaddr(self, *addresses):
         """
         Set an exception for ratelimiting based on the clients IP address.
         """
         for a in addresses:
-            if not isinstance(a, str):
-                raise TypeError(f"all addresses must be 'str' not '{type(a).__name__}'")
-        else:
-            self.__builder__.ratelimit_exc_addrs.extend(addresses)
+            check(a, str, "all addresses")
+
+        self.__builder__.ratelimit_exc_addrs.extend(addresses)
     def ratelimit_exception_paths(self, *paths):
         """
         Set an exception for ratelimiting based on the requested path.
         """
         for p in paths:
-            if not isinstance(p, str):
-                raise TypeError(f"all addresses must be 'str' not '{type(p).__name__}'")
-        else:
-            self.__builder__.ratelimit_exc_paths.extend(paths)
+            check(p, str, "all paths")
+
+        self.__builder__.ratelimit_exc_paths.extend(paths)
     def uptime(self):
         """
         Uptime counter starts when the server is started.
@@ -86,10 +84,9 @@ class BackPipe():
         If the URI limit was exceeded the client gets a special message.
         Default is 65536.
         """
-        if not isinstance(amount, int):
-            raise TypeError(f"specified amount must be 'int' not {type(amount).__name__}")
-        else:
-            self.__builder__.uri_limit = amount
+        check(amount, int, "amount")
+        
+        self.__builder__.uri_limit = amount
     def uri_limit_message(self, message):
         """
         Set the returned message when the client exceeded the URI limit.
