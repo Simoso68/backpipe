@@ -6,7 +6,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.any
+@server.any()
 def answer(r: backpipe.Request):
     txt = r.path[1:]
     svg = qrcode.make(txt, image_factory=qrcode.image.svg.SvgImage).to_string()

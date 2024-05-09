@@ -36,7 +36,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.get()
 def hello_world(r: backpipe.Request):
     return (200, "Hello World")
 
@@ -50,7 +50,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.get()
 def my_ip_address(r: backpipe.Request):
     return (200, r.address)
 
@@ -64,15 +64,15 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.any
+@server.any()
 def wrong_method(r: backpipe.Request):
     return (405, f"Wrong method: {r.method}, use POST.")
 
-@server.unknown
+@server.unknown()
 def unknown_method(r: backpipe.Request):
     return (405, f"Unknown method: {r.method}, use POST.")
 
-@server.post
+@server.post()
 def login(r: backpipe.Request):
     try:
         if r.headers["key"] == "password1234":
@@ -92,7 +92,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.post
+@server.post()
 def respond(r: backpipe.Request):
     return (200, r.body) # Returns the clients's request body
 

@@ -40,12 +40,12 @@ class BackPipe():
         if not isinstance(limit, int):
             raise TypeError(f"given rate limit must be 'int' not '{type(limit).__name__}'")
         self.__builder__.ratelimit = limit
-    def ratelimit(self, function):
+    def ratelimit(self):
         """
         Set a message, that gets responded, when a client is rate limited.
         Default is 'Too many requests from the same client.'
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.ratelimit_message = function
         return wrapper
     def set_ratelimit_reset_interval(self, time):
@@ -101,49 +101,49 @@ class BackPipe():
         else:
             raise TypeError(f"message parameter must be 'str' not '{type(message).__name__}'")
         self.__builder__.uri_limit_msg(message)
-    def get(self, function):
+    def get(self):
         """
         Set the GET request handler.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_get(function)
         return wrapper
-    def post(self, function):
+    def post(self):
         """
         Set the POST request handler.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_post(function)
         return wrapper
-    def put(self, function):
+    def put(self):
         """
         Set the PUT request handler.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_put(function)
         return wrapper
-    def patch(self, function):
+    def patch(self):
         """
         Set the PATCH request handler.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_patch(function)
         return wrapper
-    def delete(self, function):
+    def delete(self):
         """
         Set the DELETE request handler.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_delete(function)
         return wrapper
-    def unknown(self, function):
+    def unknown(self):
         """
         If an unknown method is used, the set function will handle it.
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_unknown(function)
         return wrapper
-    def any(self, function):
+    def any(self):
         """
         Set the handler for GET, POST, PUT, PATCH, DELETE.
         Can be overwritten using the normal way:
@@ -154,15 +154,15 @@ class BackPipe():
             return (200, "Blah.")
 
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.set_all(function)
         return wrapper
-    def block(self, function):
+    def block(self):
         """
         Set the request handler for client's with blocked IP addresses.
         Block an IP address by using {server_instance_name}.block_address("addr1", "addr2") ...
         """
-        def wrapper():
+        def wrapper(function):
             self.__builder__.blocked_msg = function
         return wrapper
     def block_address(self, *addresses):

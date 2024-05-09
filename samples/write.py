@@ -2,11 +2,11 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.any
+@server.any()
 def get(r: backpipe.Request):
     return (405, "Method not supported, please use POST.")
 
-@server.post
+@server.post()
 def post(r: backpipe.Request):
     try:
         content = r.headers["txt"]

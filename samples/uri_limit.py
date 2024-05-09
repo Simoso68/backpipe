@@ -2,7 +2,7 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.get()
 def respond(r: backpipe.Request):
     return (200, "Looks like you didn't exceed the URI limit!")
 

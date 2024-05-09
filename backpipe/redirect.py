@@ -9,7 +9,7 @@ class BackPipeRedirect():
     def __repr__(self) -> str:
         return self.__str__()
 
-def redirect(location: str, message: str) -> BackPipeRedirect:
+def redirect(location: str, message: str = "Page moved") -> BackPipeRedirect:
     check(location, str, "location")
     check(message, (str, bytes), "message")
     return BackPipeRedirect(location, message)
