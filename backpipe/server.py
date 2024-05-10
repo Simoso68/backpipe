@@ -103,14 +103,6 @@ class BackPipeServer(SimpleHTTPRequestHandler):
             self.close_connection = True
             return
     def handlerq(self, answer):
-        """TODO
-        if self.server.https != None:
-            if self.headers.get("X-Forwarded-Proto", "http") == "http":
-                print("YES")
-                self.send_response(301)
-                self.send_header('Location', 'https://{}{}'.format(self.server.server_address[0], self.path))
-                self.end_headers()
-        """
         if isinstance(answer, BackPipeRedirect):
             self.send_response(301)
             self.send_header("Location", answer.location)
