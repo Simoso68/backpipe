@@ -2,11 +2,11 @@ import backpipe
 
 server = backpipe.BackPipe()
 
-@server.any
+@server.any()
 def respond(r: backpipe.Request):
     return (200, r.method)
 
-@server.unknown
+@server.unknown()
 def delete(r: backpipe.Request):
     return (200, r.method)
 

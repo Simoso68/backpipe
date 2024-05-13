@@ -8,7 +8,7 @@ import urllib
 
 server = backpipe.BackPipe()
 
-@server.get
+@server.get()
 def respond(r: backpipe.Request):
     try:
         if platform.system() == "Windows":
