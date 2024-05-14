@@ -22,8 +22,6 @@ class BackPipe():
         return f"BackPipe(address={self.__builder__.addr.__repr__()}, port={self.__builder__.port})"
     def __repr__(self) -> str:
         return self.__str__()
-    def __eq__(self, other) -> bool:
-        return isinstance(other, BackPipe) and self.__dict__ == other.__dict__
     # HTTPS support still in Development, uncomment it, if you want to test it.
     #def enable_https(self, certfile, keyfile):
     #    """
