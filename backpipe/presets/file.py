@@ -37,6 +37,7 @@ def file_hoster(addr, port):
 
                 for o in os.listdir(PATH):
                     HTML.add_tag("a", o, {"href":f"{CURRENT_DIR}/{o}"})
+                    HTML.add_tag_self_closing("br")
                 return (200, HTML.text())
             else:
                 return (200, open(PATH, "rb").read())
