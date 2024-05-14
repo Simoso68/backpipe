@@ -8,15 +8,15 @@ def file_hoster(addr, port):
 
     server.set_ratelimit(60)
 
-    @server.any
+    @server.any()
     def wrong_method(r: backpipe.Request):
         return (405, f"unsupported method: {r.method}, use GET")
     
-    @server.unknown
+    @server.unknown()
     def unknown_method(r: backpipe.Request):
         return (405, f"unsupported method: {r.method}, use GET")
 
-    @server.get
+    @server.get()
     def respond(r: backpipe.Request):
         try: 
             if platform.system() == "Windows":
@@ -43,7 +43,7 @@ def file_hoster(addr, port):
         except PermissionError:
             return (403, "can not access object")
         
-    @server.ratelimit
+    @server.ratelimit()
     def ratelimit_respond(r: backpipe.Request):
         return (429, "you sent too many requests")
     
