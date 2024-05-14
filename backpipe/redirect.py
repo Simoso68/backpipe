@@ -5,7 +5,7 @@ class BackPipeRedirect():
         self.location = location
         self.message = message
     def __str__(self) -> str:
-        return f"Redirect(location={self.location}, message={self.message.__repr__()})"
+        return f"Redirect(location={self.location.__repr__()}, message={self.message.__repr__()})"
     def __repr__(self) -> str:
         return self.__str__()
 
