@@ -2,7 +2,9 @@
 
 Welcome to the BackPipe Documentation! 👋 \
 Use the tabs above to navigate through it. \
-This documentation is made with [streamlit](https://streamlit.io).
+This documentation is made with [streamlit](https://streamlit.io). \
+\
+Check out the [PyPI Page](https://pypi.org/project/backpipe).
 
 ## Before that ...
 
