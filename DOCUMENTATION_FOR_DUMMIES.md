@@ -2,6 +2,11 @@
 
 Here's a little guide for all people, who are new to backpipe.
 
+# ! INFO !
+
+This documentation is **DISCONTINUED**. \
+Read the documentation at https://backpipe.streamlit.app to stay up-to-date.
+
 ## Managing your installation of backpipe
 
 **INSTALL:** 
