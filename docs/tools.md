@@ -165,7 +165,8 @@ server.run()
 ### JSON
 
 BackPipe's JSON tool allows serializing and deserializing of dictionaries/strings containing JSON \
-Both are done with the ```serialize()``` and ```deserialize()``` functions respectively.
+Both are done with the ```serialize()``` and ```deserialize()``` functions respectively. \
+Both functions take two parameters, the first one is the value, which is to (de-)serialize and the second is the return value, if an exception occured during the process, default is ```None```.
 
 ## Congrats! 🎉
 
