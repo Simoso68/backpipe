@@ -113,9 +113,9 @@ Self-signing your certificate will make tools such as \
 CURL, your Browser, etc. raise a warning, \
 that the website may be unsafe.
 
-## Documentation for dummies
+## Documentation
 
-Read through the [Documentation for Dummies](https://github.com/Simoso68/backpipe/blob/main/DOCUMENTATION_FOR_DUMMIES.md), \
+Read through the [Documentation](https://backpipe.streamlit.app), \
 to get started with backpipe
 
 ## License
