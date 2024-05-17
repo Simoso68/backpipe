@@ -11,9 +11,9 @@ BackPipe tools offer Base64 En-/Decoding, File handling, Hashing, HTML building,
 
 Encoding is possible with ```tools.base64.encode()```. \
 Decoding with ```tools.base64.decode()```. \
-Both only take values of type ```bytes```. \
+Both only take values of type ```bytes``` or ```str```. \
 \
-Example, which encodes and then decodes your ```bytes```.
+Example, which encodes and then decodes your string.
 
 ```py
 from backpipe import tools
