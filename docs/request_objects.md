@@ -1,9 +1,9 @@
-# Request Object
+# Request Objects
 
-## What is the Request Object?
+## What are Request Objects?
 
-The Request object is an object representing the values given in the client's request to the server. \
-It holds multiple variables as attributes helping you and the server to know more information about the client. \
+Request objects are objects representing the values given in the client's request to the server. \
+They hold multiple variables as attributes helping you and the server to know more information about the client. \
 This might be really useful when making APIs.
 
 ## Available variables/attributes

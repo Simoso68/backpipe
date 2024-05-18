@@ -21,8 +21,8 @@ server = BackPipe()
 ## Specifying address & port
 
 Address and port can be specified by passing the address and port parameters with their respective values. \
-The address must be a value of type 'str'. \
-The port must be a value of type 'int'. \
+The address must be a value of type ```str```. \
+The port must be a value of type ```int```. \
 The address is set to ```""``` by default, which is another way to specify ```127.0.0.1``` \
 Changing it is not recommended if one is not experienced. \
 The port is set to ```3000``` by default.
