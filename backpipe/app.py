@@ -71,7 +71,7 @@ class BackPipe():
             check(p, str, "all paths")
 
         self.__builder__.ratelimit_exc_paths.extend(paths)
-    def uptime(self):
+    def uptime(self) -> float:
         """
         Uptime counter starts when the server is started.
         """

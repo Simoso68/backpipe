@@ -53,7 +53,7 @@ class BackPipeServer(SimpleHTTPRequestHandler):
 
             if self.client_address[0] in self.server.blocked_addresses:
                 print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Latest request from {self.client_address[0]} was blocked (Address blocked).{Fore.RESET}")
-                answer = self.server.blocked_msg(Request(self.client_address, self.path, self.headers, self.command, self.body))
+                answer = self.server.blocked_msg(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
                 self.handlerq(answer)
                 return
 
@@ -62,7 +62,7 @@ class BackPipeServer(SimpleHTTPRequestHandler):
                     if not self.client_address[0] in self.server.ratelimit_exc_addr and not self.path in self.server.ratelimit_exc_path:
                         if self.server.client_rq_minute[self.client_address[0]] >= ratelimit:
                             print(f"{Back.YELLOW}{Fore.BLACK} INFO {Back.RESET} {Fore.LIGHTRED_EX}Latest request from {self.client_address[0]} was blocked (Rate-Limit).{Fore.RESET}")
-                            answer = self.server.ratelimit_msg(Request(self.client_address, self.path, self.headers, self.command, self.body))
+                            answer = self.server.ratelimit_msg(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
                             self.handlerq(answer)
                             return
             except KeyError:
@@ -72,7 +72,7 @@ class BackPipeServer(SimpleHTTPRequestHandler):
                 self.server.add_ip_ratelimiter(self.client_address[0])
 
             if not hasattr(self, mname):
-                answer = self.server.unknown(Request(self.client_address, self.path, self.headers, self.command, self.body))
+                answer = self.server.unknown(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
                 if isinstance(answer, BackPipeRedirect):
                     self.send_response(301)
                     self.send_header("Location", answer.location)
@@ -127,17 +127,17 @@ class BackPipeServer(SimpleHTTPRequestHandler):
         else:
             raise TypeError(f"HTTP content must be 'str' or 'bytes' not '{type(answer[1]).__name__}'")
     def do_GET(self) -> None:
-        answer = self.server.get(Request(self.client_address, self.path, self.headers, self.command, self.body))
+        answer = self.server.get(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
         self.handlerq(answer)
     def do_POST(self) -> None:
-        answer = self.server.post(Request(self.client_address, self.path, self.headers, self.command, self.body))
+        answer = self.server.post(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
         self.handlerq(answer)
     def do_PUT(self) -> None:
-        answer = self.server.put(Request(self.client_address, self.path, self.headers, self.command, self.body))
+        answer = self.server.put(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
         self.handlerq(answer)
     def do_PATCH(self) -> None:
-        answer = self.server.patch(Request(self.client_address, self.path, self.headers, self.command, self.body))
+        answer = self.server.patch(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
         self.handlerq(answer)
     def do_DELETE(self) -> None:
-        answer = self.server.delete(Request(self.client_address, self.path, self.headers, self.command, self.body))
+        answer = self.server.delete(Request(self.client_address, self.path, self.headers, self.command, self.body, self.raw_requestline))
         self.handlerq(answer)
