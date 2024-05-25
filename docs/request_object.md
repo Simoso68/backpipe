@@ -17,8 +17,14 @@ This might be really useful when making APIs.
 | params    | Parsed path (only query)                    |
 | raw_path  | Unparsed path                               |
 | headers   | Dictionary holding client's request headers |
+| uri       | Raw URI sent by client                      |
 
-## Example, which responds with every information known
+## Info 💡
+
+Request URIs might be very long depending on the request sent by the client. \
+This is due to the URI holding all the important information about the request.
+
+## Example, which responds with every information known (except URI)
 
 ```py
 from backpipe import *
@@ -29,6 +35,32 @@ server = BackPipe()
 # Response function for everything
 def respond(r: Request):
     return (200, f"IP address: {r.address}\nPort: {r.port}\nMethod: {r.method}\nPath: {r.path}\nQuery: {r.params}\nUnparsed path: {r.raw_path}\nHeaders (Dictionary): {r.headers}")
+
+# Set response function for any
+@server.any()
+def any_respond(r: Request):
+    return respond(r)
+
+# Set response function for unknown
+@server.unknown()
+def unknown_respond(r: Request):
+    return respond(r)
+
+# Run the server
+server.run()
+```
+
+## Example, which sends back URI
+
+```py
+from backpipe import *
+
+# Initialize server instance
+server = BackPipe()
+
+# Response function for everything
+def respond(r: Request):
+    return (200, r.uri)
 
 # Set response function for any
 @server.any()
