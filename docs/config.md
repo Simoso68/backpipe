@@ -3,9 +3,8 @@
 ## What are BackPipe configs?
 
 BackPipe configs allow you to change the default address and port of your BackPipe servers. \
-They also allow to enable HTML by sending a header. \
+They also allow enabling HTML by sending a header. \
 Configs can be used with the ```config``` class in BackPipe. \
-See the example down below to know the syntax. \
 The ```.address()``` method only takes values of type ```str``` as input. \
 The ```.port()``` method only takes values of type ```int``` as input. \
 The ```.html()``` method only takes values of type ```bool``` as input.
