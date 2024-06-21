@@ -4,8 +4,8 @@
 
 Responses allow you to sent back information to the client. \
 HTTP responses have some crucial parts, but BackPipe only focuses on the status code and response body. \
-This can be configured by the developer. \
-Each response function needs to return an iterable like a tuple or list. \
+These can be configured by the developer. \
+Each response function needs to return an iterable like a tuple or a list. \
 The first value needs to be an integer sent as the status code. \
 The second value needs to be a string or bytes sent as the response body.
 
