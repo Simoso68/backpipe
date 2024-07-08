@@ -81,17 +81,17 @@ from backpipe import *
 server = BackPipe()
 
 # Setting a response, that gets sent, when a GET, POST, PUT, PATCH or DELETE request comes in                                                                 
-@server.any
+@server.any()
 def hello_world(r: Request):
     return (200, "Hello World!")
                              
 # Setting a response, that gets sent, when a request with an unsupported method comes in
-@server.unknown
+@server.unknown()
 def unknown_method(r: Request):
     return (405, f"The method '{r.method}' is not supported.")
                              
 # Setting a response for a ratelimited client
-@server.ratelimit
+@server.ratelimit()
 def ratelimited_response(r: Request):
     return (429, "Your client got ratelimited, please wait.")
                              
