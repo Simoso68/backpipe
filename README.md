@@ -94,7 +94,7 @@ server = backpipe.BackPipe()
 
 @server.post()
 def respond(r: backpipe.Request):
-    return (200, r.body) # Returns the clients's request body
+    return (200, r.body) # Returns the client's request body
 
 server.run()
 ```
